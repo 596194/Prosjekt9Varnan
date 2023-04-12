@@ -7,16 +7,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.6</version>
+		<version>3.0.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>no.hvl.dat108</groupId>
-	<artifactId>f19a-avdeling-crudrepo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>no.hvl.dat109</groupId>
+	<artifactId>Prosjekt9</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
 	
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	
 	<dependencies>
@@ -24,16 +24,31 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- Dette er Jakarta tags implementation, som utnytte API under -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<!-- Dette er API, denne trengs i tillegg til den over -->
+		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 		
 		<dependency>
@@ -55,7 +70,15 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>42.5.4</version>
 		</dependency>
+		
+				<!-- https://mvnrepository.com/artifact/com.mopano/hibernate-array-contributor -->
+<dependency>
+    <groupId>com.mopano</groupId>
+    <artifactId>hibernate-array-contributor</artifactId>
+    <version>1.2</version>
+</dependency>
 		
 		<dependency>
     <groupId>org.mockito</groupId>
@@ -63,6 +86,7 @@
     <version>4.6.1</version>
     <scope>test</scope>
 	</dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -78,14 +102,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<propertiesEncoding>ISO-8859-1</propertiesEncoding>
+				</configuration>
+			</plugin>
         </plugins>
 	</build>
 

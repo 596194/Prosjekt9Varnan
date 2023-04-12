@@ -3,6 +3,7 @@ package no.hvl.dat109.service;
 import java.util.ArrayList;
 
 
+
 import java.util.List;
 
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import no.hvl.dat109.model.Bruker;
 import no.hvl.dat109.model.Spill;
 import no.hvl.dat109.model.Spilldeltakelse;
+
 import no.hvl.dat109.model.Tur;
 import no.hvl.dat109.model.idclass.SpillDeltakelseId;
 import no.hvl.dat109.repo.BrukerRepo;
@@ -48,7 +50,11 @@ public class TestSpillService {
 		brukerepo.save(bruker);
 	}
 	
+<<<<<<< HEAD
 	public Bruker lagBrukerReturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
+=======
+	public Bruker lagBrukereturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
+>>>>>>> stash
 		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
 		brukerepo.save(bruker);
 		return bruker;
@@ -204,6 +210,21 @@ public class TestSpillService {
 	   
         System.out.println(spillDeltakelse.toString());
     }
+
+	public List<Bruker> findAll() {
+		return brukerepo.findAll();
+		
+	}
+
+	public List<Spilldeltakelse> findAllSpiller() {
+		
+		return sprepo.findAll();
+	}
+   public List<Spill> findAllSpill() {
+		
+		return spillrepo.findAll();
+	}
+
 
     
 }
