@@ -118,7 +118,8 @@ public class TestSpilldeltakelseRepo {
 	@Test
 	public void sletttSpillerTest()
 	
-	{    Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
+	{   
+		Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
 	     Spill spill= new Spill("F");
 		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
 		Spilldeltakelse spillerdeltaker = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()),
@@ -130,8 +131,8 @@ public class TestSpilldeltakelseRepo {
 		mock.slettSpillDeltakelse(spillerdeltaker);
 		
 		when(mock.hentSpillDeltakelse(1,1)).thenReturn(null);
-		//assertEquals(spillerdeltaker.getBrukerid(),null);
-		assertEquals(spillerdeltaker,null);
+		assertEquals(spillerdeltaker.getBrukerid(),null);
+		
 		
 		
 		
