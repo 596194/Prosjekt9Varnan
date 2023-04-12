@@ -33,6 +33,9 @@ public class Spilldeltakelse {
     @JoinColumn(name = "brukerid")
 	private Bruker brukerid;
 	
+	@Column(name="harspilt", nullable = false)
+	private boolean harspilt;
+	
 	//@ElementCollection
 	//@OrderColumn
 	//@Type(type = "no.hvl.dat109.model.CustomIntegerArrayType")
@@ -46,6 +49,7 @@ public class Spilldeltakelse {
 		Id = id;
 		this.spillid = spillid;
 		this.brukerid = brukerid;
+		this.harspilt = false;
 		this.resultat= resultat;
 	}
 	
@@ -85,7 +89,15 @@ public class Spilldeltakelse {
 		this.resultat = resultat;
 	}
 	
-    public void leggTilResultat(int runde, int poeng){
+    public boolean isHarspilt() {
+		return harspilt;
+	}
+
+	public void setHarspilt(boolean harspilt) {
+		this.harspilt = harspilt;
+	}
+
+	public void leggTilResultat(int runde, int poeng){
         resultat[runde-1] = poeng;
     }
 	

@@ -48,6 +48,12 @@ public class TestSpillService {
 		brukerepo.save(bruker);
 	}
 	
+	public Bruker lagBrukerReturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
+		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
+		brukerepo.save(bruker);
+		return bruker;
+	}
+	
 	public void lagSpill(String status) {
 		Spill spill = new Spill("A");
 		spillrepo.save(spill);
@@ -67,7 +73,7 @@ public class TestSpillService {
 		Bruker bruker= hentBruker(brukernavn);
 		Spill spill = hentSpill(spillid);
 		Spilldeltakelse spilldeltakelse = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid())
-		, spill, bruker, new Integer[15]);
+		, spill, bruker,new Integer[15]);
 		sprepo.save(spilldeltakelse);
 	}
 	
