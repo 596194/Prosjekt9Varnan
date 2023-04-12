@@ -107,11 +107,6 @@ public class TestSpilldeltakelseRepo {
 		 spillDeltakelse.add(spiller3);
 		 
 		
-	    
-		
-		
-		
-		
 		
 		 when(mock.hentSpillDeltakelse(1,1)).thenReturn(spiller);
 		 
@@ -119,6 +114,7 @@ public class TestSpilldeltakelseRepo {
 		assertEquals(spiller,actual);
 		
 	}
+	
 	@Test
 	public void sletttSpillerTest()
 	
@@ -134,7 +130,8 @@ public class TestSpilldeltakelseRepo {
 		mock.slettSpillDeltakelse(spillerdeltaker);
 		
 		when(mock.hentSpillDeltakelse(1,1)).thenReturn(null);
-		assertEquals(spillerdeltaker.getBrukerid(),null);
+		//assertEquals(spillerdeltaker.getBrukerid(),null);
+		assertEquals(spillerdeltaker,null);
 		
 		
 		
