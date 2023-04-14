@@ -45,16 +45,16 @@ public class TestSpillService {
 		brukerepo.delete(bruker);
 	}
 	
+	
+	
 	public void lagBruker(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
 		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
 		brukerepo.save(bruker);
 	}
 	
-<<<<<<< HEAD
+
 	public Bruker lagBrukerReturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
-=======
-	public Bruker lagBrukereturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
->>>>>>> stash
+
 		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
 		brukerepo.save(bruker);
 		return bruker;
@@ -224,6 +224,11 @@ public class TestSpillService {
 		
 		return spillrepo.findAll();
 	}
+
+public void lagBruker(Bruker bruker) {
+	brukerepo.save(bruker);
+	
+}
 
 
     

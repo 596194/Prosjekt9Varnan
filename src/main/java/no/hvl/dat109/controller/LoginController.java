@@ -43,11 +43,7 @@ public class LoginController {
     		HttpServletRequest request,	RedirectAttributes ra) {
 		
 		Bruker bruker = testSpill.hentBruker(brukernavn);
-		
-		if (!InputValidator.isValidUsername(bruker.getBrukernavn())) {
-			ra.addFlashAttribute("redirectMessage", INVALID_USERNAME_MESSAGE);
-			return "redirect:" + LOGIN_URL;
-		}
+			
 		if(!PassordUtil.validerMedSalt(passord, bruker.getSalt(), bruker.getPassordhash())) {
 			ra.addFlashAttribute("redirectMessage", INVALID_USERNAME_MESSAGE);
 			return "redirect:" + LOGIN_URL;

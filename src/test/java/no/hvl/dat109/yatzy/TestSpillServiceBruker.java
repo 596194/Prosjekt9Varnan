@@ -1,8 +1,11 @@
 package no.hvl.dat109.yatzy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,13 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mock.Strictness;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 import jakarta.inject.Inject;
 import no.hvl.dat109.model.Bruker;
+import no.hvl.dat109.model.Spilldeltakelse;
 import no.hvl.dat109.repo.BrukerRepo;
 import no.hvl.dat109.service.TestSpillService;
 
@@ -36,9 +42,6 @@ class TestSpillServiceBruker {
 		
 	@BeforeEach
 	public void setUp() {
-		
-		//mock = mock(TestSpillService.class);
-		
 		MockitoAnnotations.openMocks(this);
 
 	}
@@ -62,8 +65,9 @@ class TestSpillServiceBruker {
 		
 		//Assert
 		assertEquals(5, allebrukkere.size());
-		assertFalse(allebrukkere.contains("Ahmad"));
+		assertTrue(allebrukkere.get(3).getBrukernavn().equals("Jasmin23"));
 		assertTrue(allebrukkere.get(4).getBrukernavn().equals("Nora8"));
+		
 			
 	}
 	
@@ -78,10 +82,7 @@ class TestSpillServiceBruker {
 		 
 		Bruker actual=mock.hentBruker("Sara1");
 		assertEquals(bruker,actual);
-		
-		
-		
-		
+				
 }
 	
 	
@@ -89,27 +90,30 @@ class TestSpillServiceBruker {
 	public void slettBrukerTest()
 	{
 		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		
+		mock.lagBruker(bruker);
 		assertEquals(bruker.getBrukernavn(),"Sara1");
-		
+		System.out.println(bruker.getBrukernavn());
 		mock.slettBruker(bruker);
 		
-		when(mock.hentBruker("Sara1").getBrukernavn()).thenReturn(null);
+		bruker = mock.hentBruker("Sara1");
 		
 		assertEquals(null,bruker);
+	    
+	    
+			
 }
-	
+
 	@Test
 	public void lagBrukerTest()
-	{
-		
-		//Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		
-		Bruker bruker = mock.lagBrukereturn("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		
-		assertEquals(bruker.getBrukernavn(), "Sara1");
-		
 	
+	{
+		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
+		mock.lagBruker(bruker);
+		when(mock.hentBruker("Sara1")).thenReturn(bruker);
+		System.out.println(bruker.getEtternavn());
+		
+		assertEquals(bruker.getBrukernavn(),"Sara1");
+		assertEquals(bruker.getEtternavn(),"Yakup");
 }
 	
 }

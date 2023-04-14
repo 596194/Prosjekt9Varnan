@@ -122,20 +122,17 @@ public class TestSpilldeltakelseRepo {
 		Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
 	     Spill spill= new Spill("F");
 		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		Spilldeltakelse spillerdeltaker = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()),
-				spill, bruker, resultat);
-		
-		
-		
+		Spilldeltakelse spillerdeltaker = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(),
+				bruker.getBrukerid()),spill, bruker, resultat);
 		
 		mock.slettSpillDeltakelse(spillerdeltaker);
 		
-		when(mock.hentSpillDeltakelse(1,1)).thenReturn(null);
-		assertEquals(spillerdeltaker.getBrukerid(),null);
+		
+		spillerdeltaker= mock.hentSpillDeltakelse(1, 1);
 		
 		
-		
-		
+		//when(mock.hentSpillDeltakelse(1,1)).thenReturn(null);
+		assertEquals(null,spillerdeltaker);
 		
 	}
 	
