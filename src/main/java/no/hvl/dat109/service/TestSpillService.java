@@ -64,6 +64,11 @@ public class TestSpillService {
 		Spill spill = new Spill("A");
 		spillrepo.save(spill);
 	}
+	public Spill lagSpillReturn(String status) {
+		Spill spill = new Spill("A");
+		spillrepo.save(spill);
+		return spill;
+	}
 	
 	public Spill hentSpill(Integer id) {
 		return spillrepo.findById(id).orElse(null);

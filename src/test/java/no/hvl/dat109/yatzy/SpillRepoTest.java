@@ -27,11 +27,6 @@ import no.hvl.dat109.model.Spill;
 @ExtendWith(MockitoExtension.class) 
 class SpillRepoTest {
 
-	//@InjectMocks
-	//TestSpillService bs;
-	
-	//@Mock
-	//SpillRepo spillrepo;
 	@Mock
 	TestSpillService mock;
 	
@@ -82,4 +77,41 @@ class SpillRepoTest {
 		assertEquals(spill,actual);
 			
 }
-}
+    @Test
+   	public void lagSpillTest()
+   	
+   	{
+   	   Spill spill = new Spill("F");
+       mock.lagSpill("F");
+   	   when(mock.hentSpill(1)).thenReturn(spill);
+   	   
+  
+   		 
+   		Spill actual=mock.hentSpill(1);
+   		assertEquals(actual.getStatus(),"F");
+   			
+   }
+    
+    @Test
+   	public void okNyRundeTest()
+   	
+   	{
+   	   Spill spill = new Spill("F");
+       Integer runde= mock.okNyrunde(spill);
+       assertEquals(spill.getRunde(),runde);
+       assertTrue(spill.getRunde()==runde);
+   		 
+   	 		
+    }
+    @DisplayName("sletter Spillet")
+    @Test
+   	public void slettSpillTest()
+   	
+   	{
+   	   
+       Spill spill=mock.lagSpillReturn("F");
+   	
+   		mock.slettSpill(spill);
+   		assertEquals(null,spill);
+   			
+   }}

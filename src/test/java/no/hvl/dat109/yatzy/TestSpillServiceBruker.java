@@ -33,10 +33,7 @@ import no.hvl.dat109.service.TestSpillService;
 //@ExtendWith(MockitoExtension.class) 
 class TestSpillServiceBruker {
 
-   //@Mock
-	//BrukerRepo br;
-	
-	//@InjectMocks
+
 	@Mock
 	TestSpillService mock;
 		

@@ -33,13 +33,6 @@ import no.hvl.dat109.service.TestSpillService;
 @ExtendWith(MockitoExtension.class) 
 public class TestSpilldeltakelseRepo {
 
-	//@InjectMocks
-	//TestSpillService bs;
-	
-	//@Mock
-	//SpillerRepo spillerrep;
-	
-	//@InjectMocks
 	@Mock
 	TestSpillService mock;
 	
@@ -87,17 +80,16 @@ public class TestSpilldeltakelseRepo {
 		 List<Spilldeltakelse> spillDeltakelse= new ArrayList<Spilldeltakelse> ();
 		 Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
 		 Integer[] resultat2={1,2,7,9,3,6,2,9,3,9,3,6,13,13,6};
-		// Integer[] resultat3={1,2,7,9,3,6,2,9,3,9,3,6,13,13,6};
+		 Integer[] resultat3={1,2,7,9,3,6,2,9,3,9,3,6,13,13,6};
 		 
 		 Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
 		 Bruker bruker1=new Bruker("Elias1","Elias","Yakup", "Elias@yahoo.com", "23dfdfdv");
 	     Bruker bruker2= new Bruker("Liam23","Olav","Liam", "liam@yahoo.com", "sdfdf");
-	    // Bruker bruker3=new Bruker("Jasmin23","Jasmin","Ali", "Jasmin@yahoo.com", "dfdsfdgfd");
-		// Bruker bruker4=new Bruker("Nora8","Nora","Oscar", "Nora@yahoo.com", "okh45asf");
+	   
 		 
 		 Spill spill= new Spill("F"); 
 		 
-		 //SpillDeltakelseId spilldeltakelseid=new SpillDeltakelseId(1,1);
+		 
 		 
 		 Spilldeltakelse spiller = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()), spill, bruker, resultat);
 		 Spilldeltakelse spiller2 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker1.getBrukerid()), spill, bruker1, resultat2);
@@ -131,9 +123,46 @@ public class TestSpilldeltakelseRepo {
 		spillerdeltaker= mock.hentSpillDeltakelse(1, 1);
 		
 		
-		//when(mock.hentSpillDeltakelse(1,1)).thenReturn(null);
 		assertEquals(null,spillerdeltaker);
 		
+	}
+	
+	
+	@Test
+	public void hentSpillDeltakelserForSpillTest()
+	
+	{
+		 List<Spilldeltakelse> spillDeltakelse= new ArrayList<Spilldeltakelse> ();
+		 Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
+		 Integer[] resultat2={1,2,7,9,3,6,2,9,3,9,3,6,13,13,6};
+		 Integer[] resultat3={1,2,7,9,3,6,2,9,3,9,3,6,13,13,6};
+		 
+		 Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
+		 Bruker bruker1=new Bruker("Elias1","Elias","Yakup", "Elias@yahoo.com", "23dfdfdv");
+	     Bruker bruker2= new Bruker("Liam23","Olav","Liam", "liam@yahoo.com", "sdfdf");
+	    
+		 Spill spill= new Spill("F"); 
+		 
+		
+		 
+		 Spilldeltakelse spiller = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()), spill, bruker, resultat);
+		 Spilldeltakelse spiller2 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker1.getBrukerid()), spill, bruker1, resultat2);
+		 Spilldeltakelse spiller3 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker2.getBrukerid()), spill, bruker2, resultat3);
+		 spillDeltakelse.add(spiller);
+		 spillDeltakelse.add(spiller2);
+		 spillDeltakelse.add(spiller3);
+		 
+		
+		
+		 when(mock.hentSpillDeltakelserForSpill(spill)).thenReturn(spillDeltakelse);
+		 List<Spilldeltakelse> spillere=mock.hentSpillDeltakelserForSpill(spill);		 
+		 
+		
+		 
+		assertTrue(spillere.contains(spiller));
+		assertEquals(3, spillere.size());
+		assertTrue(spillere.contains(spiller2));
+		assertTrue(spillere.contains(spiller3));
 	}
 	
 }
