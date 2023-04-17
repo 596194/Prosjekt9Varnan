@@ -65,6 +65,9 @@ class SpillRepoTest {
 	
 		
 	}
+    /**
+	 *tester metoden hentSpill
+	 */
     @Test
 	public void hentSpillTest()
 	
@@ -77,6 +80,9 @@ class SpillRepoTest {
 		assertEquals(spill,actual);
 			
 }
+    /**
+	 *tester metoden lagSpill.
+	 */
     @Test
    	public void lagSpillTest()
    	
@@ -91,7 +97,9 @@ class SpillRepoTest {
    		assertEquals(actual.getStatus(),"F");
    			
    }
-    
+    /**
+	 *tester metoden okNyRunde
+	 */
     @Test
    	public void okNyRundeTest()
    	
@@ -103,6 +111,9 @@ class SpillRepoTest {
    		 
    	 		
     }
+    /**
+	 *tester metoden slettSpill.
+	 */
     @DisplayName("sletter Spillet")
     @Test
    	public void slettSpillTest()

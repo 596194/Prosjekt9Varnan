@@ -56,6 +56,9 @@ class SpillTestServiceTest {
 	
 		
 	}
+    /**
+	 *tester metoden finnSpillTest(1)
+	 */
     @DisplayName("SpillTestservice finnSpillTest metoden.")
     @Test
 	public void finnSpillTest()
@@ -68,7 +71,7 @@ class SpillTestServiceTest {
 		 when(mock.finnSpillTest(1)).thenReturn((List<Spilltest>) list);
 		 
 		 List<Spilltest> actual=mock.finnSpillTest(1);
-		//assertEquals(actual,spill);
+		
 		assertTrue(actual.contains(spill));
 		assertTrue(list.contains(spill));
 			

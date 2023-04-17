@@ -16,6 +16,9 @@ import no.hvl.dat109.model.idclass.SpillDeltakelseId;
 
 //@TypeDefs({@TypeDef(name = "integer-array",typeClass = CustomIntegerArrayType.class)})
 
+/**
+ * Spilldeltakelse 
+ */
 @Entity
 @Table(schema="Prosjekt9")
 public class Spilldeltakelse {
@@ -43,7 +46,9 @@ public class Spilldeltakelse {
 	// @Convert(converter = CustomIntegerArrayType.class)
 	private Integer[] resultat = new Integer[15];
 	
-	
+	/**
+	 * Konstruktor
+	 */
 	public Spilldeltakelse(SpillDeltakelseId id, Spill spillid, Bruker brukerid, Integer[] resultat) {
 		super();
 		Id = id;
@@ -97,10 +102,16 @@ public class Spilldeltakelse {
 		this.harspilt = harspilt;
 	}
 
+	/**
+	 * legger til resultatet
+	 */
 	public void leggTilResultat(int runde, int poeng){
         resultat[runde-1] = poeng;
     }
 	
+	/**
+	 * Hver spiller tar sin tur.
+	 */
     public void taTur(Tur tur, int runde){
 //      de to første kastene kan man velge hva man skal beholde
       System.out.println("runde nr " + runde);
@@ -118,7 +129,9 @@ public class Spilldeltakelse {
 //      - spillDeltakelse for å kunne lagre resultatene
       tur.registrer(runde, this);
   }
-
+    /**
+	 * toString metoden.
+	 */
 	@Override
 	public String toString() {
 		return "Spilldeltakelse [Id=" + Id + ", spillid=" + spillid + ", brukerid=" + brukerid + ", resultat="

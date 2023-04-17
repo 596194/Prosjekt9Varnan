@@ -13,6 +13,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+/**
+ * Spill klassen
+ */
 @Entity
 @Table(schema="Prosjekt9")
 public class Spill {
@@ -34,6 +38,10 @@ public class Spill {
 		this.status = status;
 		this.runde=0;
 	}
+
+    /**
+     * konstruktor
+     */
 	public Spill() {
 		
 	}

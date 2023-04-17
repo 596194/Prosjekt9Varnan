@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,7 +44,9 @@ class TestSpillServiceBruker {
 
 	}
 	
-	
+	/**
+	 *tester metoden findAll().
+	 */
 	@Test
 	void finnerAlleBrukker() {
 		
@@ -68,7 +71,9 @@ class TestSpillServiceBruker {
 			
 	}
 	
-	
+	/**
+	 *tester metoden hentBruker
+	 */
 	@Test
 	public void hentBrukerTest()
 	
@@ -82,7 +87,9 @@ class TestSpillServiceBruker {
 				
 }
 	
-	
+	/**
+	 *tester metoden slettBruker
+	 */
 	@Test
 	public void slettBrukerTest()
 	{
@@ -99,7 +106,9 @@ class TestSpillServiceBruker {
 	    
 			
 }
-
+	/**
+	 *tester metoden lagBruker
+	 */
 	@Test
 	public void lagBrukerTest()
 	
@@ -112,5 +121,18 @@ class TestSpillServiceBruker {
 		assertEquals(bruker.getBrukernavn(),"Sara1");
 		assertEquals(bruker.getEtternavn(),"Yakup");
 }
+
+	@DisplayName("Tester at Brukeren blir opprettet,(Bruker klassen)")
+	@Test
+	void RegistreringOfBruker() {
+		Bruker bruker1=new Bruker("Sara1","Sara","Petter", "sara@yahoo.com", "1234abds");
+		Bruker bruker2=new Bruker("Elias1","Elias","Yakup", "Elias@yahoo.com", "23dfdfdv");
+
+		 assertTrue(bruker1.getBrukernavn()=="Sara1");
+		 assertTrue(bruker1.getFornavn()=="Sara");
+		 assertTrue(bruker2.getBrukernavn()=="Elias1");
+		 assertFalse(bruker2.getBrukernavn()=="Elias");
+
+	}
 	
 }

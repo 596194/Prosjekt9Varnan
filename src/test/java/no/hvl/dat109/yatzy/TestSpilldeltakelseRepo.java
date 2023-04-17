@@ -73,8 +73,11 @@ public class TestSpilldeltakelseRepo {
 	
 		
 	}
+    /**
+	 *tester metoden hentSpillDeltakelse
+	 */
 	@Test
-	public void hentSpillerTest()
+	public void hentSpillDeltakelseTest()
 	
 	{
 		 List<Spilldeltakelse> spillDeltakelse= new ArrayList<Spilldeltakelse> ();
@@ -93,7 +96,7 @@ public class TestSpilldeltakelseRepo {
 		 
 		 Spilldeltakelse spiller = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()), spill, bruker, resultat);
 		 Spilldeltakelse spiller2 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker1.getBrukerid()), spill, bruker1, resultat2);
-		 Spilldeltakelse spiller3 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker2.getBrukerid()), spill, bruker2, resultat2);
+		 Spilldeltakelse spiller3 = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker2.getBrukerid()), spill, bruker2, resultat3);
 		 spillDeltakelse.add(spiller);
 		 spillDeltakelse.add(spiller2);
 		 spillDeltakelse.add(spiller3);
@@ -107,8 +110,11 @@ public class TestSpilldeltakelseRepo {
 		
 	}
 	
+	/**
+	 *tester metoden slettSpillDeltakelse
+	 */
 	@Test
-	public void sletttSpillerTest()
+	public void sletttSpillDeltakelseTest()
 	
 	{   
 		Integer[] resultat= {1,2,7,9,3,6,2,9,3,9,3,6,23,12,9};
@@ -127,7 +133,9 @@ public class TestSpilldeltakelseRepo {
 		
 	}
 	
-	
+	/**
+	 *tester metoden hentSpillDeltakelserForSpill
+	 */
 	@Test
 	public void hentSpillDeltakelserForSpillTest()
 	
