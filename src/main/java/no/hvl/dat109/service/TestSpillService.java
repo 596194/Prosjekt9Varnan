@@ -3,7 +3,6 @@ package no.hvl.dat109.service;
 import java.util.ArrayList;
 
 
-
 import java.util.List;
 
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import no.hvl.dat109.model.Bruker;
 import no.hvl.dat109.model.Spill;
 import no.hvl.dat109.model.Spilldeltakelse;
-
 import no.hvl.dat109.model.Tur;
 import no.hvl.dat109.model.idclass.SpillDeltakelseId;
 import no.hvl.dat109.repo.BrukerRepo;
@@ -45,30 +43,22 @@ public class TestSpillService {
 		brukerepo.delete(bruker);
 	}
 	
-	
-	
 	public void lagBruker(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
 		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
 		brukerepo.save(bruker);
-	}
-	
-
-	public Bruker lagBrukerReturn(String brukernavn, String fornavn,String etternavn,String epost,String passord) {
-
-		Bruker bruker = new Bruker(brukernavn, fornavn, etternavn, epost, passord); 
-		brukerepo.save(bruker);
-		return bruker;
 	}
 	
 	public void lagSpill(String status) {
 		Spill spill = new Spill("A");
 		spillrepo.save(spill);
 	}
-	public Spill lagSpillReturn(String status) {
+	
+	public Spill lagSpill1(String status) {
 		Spill spill = new Spill("A");
 		spillrepo.save(spill);
 		return spill;
 	}
+	
 	
 	public Spill hentSpill(Integer id) {
 		return spillrepo.findById(id).orElse(null);
@@ -83,9 +73,16 @@ public class TestSpillService {
 	public void lagSpillDeltakelse(String brukernavn , Integer spillid) {
 		Bruker bruker= hentBruker(brukernavn);
 		Spill spill = hentSpill(spillid);
-		Spilldeltakelse spilldeltakelse = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid())
-		, spill, bruker,new Integer[15]);
+		Spilldeltakelse spilldeltakelse = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()), spill, bruker,new Integer[15]);
 		sprepo.save(spilldeltakelse);
+	}
+	
+	public Spilldeltakelse lagSpillDeltakelse1(String brukernavn , Integer spillid) {
+		Bruker bruker= hentBruker(brukernavn);
+		Spill spill = hentSpill(spillid);
+		Spilldeltakelse spilldeltakelse = new Spilldeltakelse(new SpillDeltakelseId(spill.getSpillid(), bruker.getBrukerid()), spill, bruker,new Integer[15]);
+		sprepo.save(spilldeltakelse);
+		return spilldeltakelse;
 	}
 	
 	
@@ -97,6 +94,8 @@ public class TestSpillService {
 	public void slettSpillDeltakelse(Spilldeltakelse spilldeltakelse) {
 		sprepo.delete(spilldeltakelse);
 	}
+	
+
 	
 	public void lagTestBrukere(String b1, String b2) {
 		
@@ -126,6 +125,7 @@ public class TestSpillService {
 		}
 	
 	}
+	
 	public void lagTestSpill() {
 		
 		lagTestBrukere("Ola", "Ida");
@@ -147,18 +147,27 @@ public class TestSpillService {
 		for(Spilldeltakelse s: sprepo.findAll()) {
 			if(s.getId().getSpillid() == id) {
 				sd.add(s);
+				System.out.println(s.toString());
 			}
 		}
 		return sd;
 	}
 	
+	//oke runde for spillcontroller
 	public Integer okNyrunde(Spill spill) {
-		
 		spill.setRunde(spill.getRunde()+1);
 		spillrepo.save(spill);
 		return spill.getRunde();
 	}
-
+	
+	
+	//oke runde for en Ida og Ola controller(oker samtidig)
+	public Integer okNyrunde(Spill spill, List<Spilldeltakelse> spillDeltakelser) {
+		resetHarspilt(spillDeltakelser);
+		spill.setRunde(spill.getRunde()+1);
+		spillrepo.save(spill);
+		return spill.getRunde();
+	}
 /*	
 	public void TestSpill(List<Spilldeltakelse> spillDeltakelser, Spill spill) {		
 	       for(int i=0; i<15; i++){
@@ -185,10 +194,20 @@ public class TestSpillService {
       }
     } 
     
+    
+    public void spillRunde(int runde, Spilldeltakelse spillDeltakelse){
+//      hver spiller i spiller-listen tar én tur
+//          en tur blir opprettet for gjeldende bruker
+          Tur tur = new Tur();
+//          spilleren tar sin tur på gjeldende runde
+          taTur(tur, runde, spillDeltakelse);
+    } 
+    
     public void leggTilResultat(int runde, int poeng, Spilldeltakelse spillDeltakelse){
         spillDeltakelse.getResultat()[runde-1] = poeng;
     	spillDeltakelse.setResultat(spillDeltakelse.getResultat());
     	sprepo.save(spillDeltakelse);
+    	//harSpiltTur(spillDeltakelse);
     }
 	
     public void taTur(Tur tur, int runde, Spilldeltakelse spillDeltakelse){
@@ -215,26 +234,97 @@ public class TestSpillService {
 	   
         System.out.println(spillDeltakelse.toString());
     }
-
-	public List<Bruker> findAll() {
-		return brukerepo.findAll();
-		
+   
+   public boolean harAlleSpiltSinTur(List<Spilldeltakelse> spillDeltakelser) {
+	   
+	   for(Spilldeltakelse spilldeltakelse: spillDeltakelser) {
+		   if(!spilldeltakelse.getHarspilt()) {
+		   return false;
+		   } 
+	   	}  
+	   return true;
+   }
+   
+   public void harSpiltTur(Spilldeltakelse spilldeltakelse) {
+	   spilldeltakelse.setHarspilt(true);
+	   sprepo.save(spilldeltakelse);
+   }
+   
+   public void resetHarspilt(List<Spilldeltakelse> spillDeltakelser) {
+	   
+	   for(Spilldeltakelse spilldeltakelse: spillDeltakelser) {
+		 resetSpilt(spilldeltakelse);
+	   }
+	   
+   }
+   
+   public void resetSpilt(Spilldeltakelse spilldeltakelse) {
+	   spilldeltakelse.setHarspilt(false);
+	   sprepo.save(spilldeltakelse);
+   }
+   
+	public List<Spill> hentAlleNyeSpill(){
+		List<Spill> spillene = new ArrayList<Spill>();
+		for(Spill spill: spillrepo.findAll()) {
+			if(spill.getStatus().equals("A")) {
+				spillene.add(spill);
+			}
+		}
+		return spillene; 
 	}
-
-	public List<Spilldeltakelse> findAllSpiller() {
-		
+	
+	public List<Spill> hentAlleAktiveSpill(Integer brukerid){
+		List<Spill> spillene = new ArrayList<Spill>();
+		List<Spilldeltakelse> sdListe = alleAktiveSpill(brukerid);
+		for(Spill spill: spillrepo.findAll()) {
+			for(Spilldeltakelse sd:sdListe) {
+				if(spill.getStatus().equals("A") && spill.getSpillid()==sd.getSpillid().getSpillid()) {
+					spillene.add(spill);
+				}
+			}
+		}
+		return spillene; 
+	}
+	
+	public List<Spill> hentAlleFerdigSpill(Integer brukerid){
+		List<Spill> spillene = new ArrayList<Spill>();
+		List<Spilldeltakelse> sdListe = alleAktiveSpill(brukerid);
+		for(Spill spill: spillrepo.findAll()) {
+			for(Spilldeltakelse sd:sdListe) {
+				if(spill.getStatus().equals("F") && spill.getSpillid()==sd.getSpillid().getSpillid()) {
+					spillene.add(spill);
+				}
+			}
+		}
+		return spillene; 
+	}
+	
+	//hjelpe metode for hentaleaktivespill, men trenger den egentlig ikke.
+	public List<Spilldeltakelse> alleAktiveSpill(Integer brukerid){
+		List<Spilldeltakelse> liste= new ArrayList<Spilldeltakelse>();
+		for(Spilldeltakelse sd: sprepo.findAll()) {
+			if(sd.getId().getSpilerid()==brukerid) {
+				liste.add(sd);
+			}
+		}
+		return liste;
+	}
+	
+	public void ferdigSpill(Spill spill) {
+		spill.setStatus("F");
+		spillrepo.save(spill);
+	}
+    
+	public List<Bruker> findAll(){
+		return brukerepo.findAll();
+	}
+	
+	public List<Spilldeltakelse> findAllSpiller(){
 		return sprepo.findAll();
 	}
-   public List<Spill> findAllSpill() {
-		
+	
+	public List<Spill> findAllSpill(){
 		return spillrepo.findAll();
 	}
-
-public void lagBruker(Bruker bruker) {
-	brukerepo.save(bruker);
 	
-}
-
-
-    
 }

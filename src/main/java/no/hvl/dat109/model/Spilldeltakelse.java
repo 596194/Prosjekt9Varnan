@@ -89,7 +89,7 @@ public class Spilldeltakelse {
 		this.resultat = resultat;
 	}
 	
-    public boolean isHarspilt() {
+    public boolean getHarspilt() {
 		return harspilt;
 	}
 

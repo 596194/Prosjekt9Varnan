@@ -87,7 +87,7 @@ class TestSpillServiceBruker {
 	public void slettBrukerTest()
 	{
 		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		mock.lagBruker(bruker);
+		mock.lagBruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
 		assertEquals(bruker.getBrukernavn(),"Sara1");
 		System.out.println(bruker.getBrukernavn());
 		mock.slettBruker(bruker);
@@ -105,7 +105,7 @@ class TestSpillServiceBruker {
 	
 	{
 		Bruker bruker = new Bruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
-		mock.lagBruker(bruker);
+		mock.lagBruker("Sara1","Sara","Yakup","sdsd@ysdfsfs", "asdsds123");
 		when(mock.hentBruker("Sara1")).thenReturn(bruker);
 		System.out.println(bruker.getEtternavn());
 		

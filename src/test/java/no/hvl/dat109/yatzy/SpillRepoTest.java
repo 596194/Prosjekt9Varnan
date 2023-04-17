@@ -109,7 +109,7 @@ class SpillRepoTest {
    	
    	{
    	   
-       Spill spill=mock.lagSpillReturn("F");
+       Spill spill=mock.lagSpill1("F");
    	
    		mock.slettSpill(spill);
    		assertEquals(null,spill);

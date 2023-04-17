@@ -1,0 +1,32 @@
+/*Hentet fra https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_responsive_header og modifisert til å passe headeren vår*/
+.header{
+    overflow: hidden;
+    background-color: #212121;
+    padding: 20px 10px;
+}
+.header-right {
+    float: right;
+}
+
+.header a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+.header a:hover {
+     background-color: #474747;
+ }
+
+div {
+    float: left;
+    padding: 15px;
+}
+
+.div1 {
+    background: red;
+}
