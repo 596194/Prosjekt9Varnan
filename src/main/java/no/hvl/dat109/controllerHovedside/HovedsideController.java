@@ -26,7 +26,7 @@ public class HovedsideController {
 	@Value("${app.url.login}")   private String LOGIN_URL;
 	@Value("${app.url.hovedside}") private String HOVEDSIDE_URL;
 	@Value("${app.url.minside}") private String MINSIDE_URL;
-	@Value("${app.url.spill}") private String SPILL_URL;	
+	@Value("${app.url.spillside}") private String SPILLSIDE_URL;
 	@Value("${app.url.aktivespill}") private String AKTIVESPILL_URL;
 	@Value("${app.url.historikk}") private String HISTORIKK_URL;
 	
@@ -51,10 +51,10 @@ public class HovedsideController {
 		}
 
 		return switch (valg) {
-			case "min_side" -> "redirect:" + MINSIDE_URL;
-			case "Spill" -> "redirect:" + SPILL_URL;
-			case "aktivespill" -> "redirect:" + AKTIVESPILL_URL;
-			case "historikk" -> "redirect:" + HISTORIKK_URL;
+			case "Min_side" -> "redirect:" + MINSIDE_URL;
+			case "Spill" -> "redirect:" + SPILLSIDE_URL;
+			case "Mine aktive" -> "redirect:" + AKTIVESPILL_URL;
+			case "Historikk" -> "redirect:" + HISTORIKK_URL;
 			default -> "redirect:" + HOVEDSIDE_URL;
 		};
 

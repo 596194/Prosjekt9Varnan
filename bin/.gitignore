@@ -31,4 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+/.gitignore
+/.mvn/
+/pom.xml
+/readme.md
 /src/
+/yatzy.sql
