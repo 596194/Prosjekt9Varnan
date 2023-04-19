@@ -83,6 +83,7 @@ public class SpillOController {
 		}
 		if(testSpill.harAlleSpiltSinTur(spillDeltakelser)) {
 			rundenr = testSpill.okNyrunde(spill, spillDeltakelser);
+			testSpill.resetHarspilt(spillDeltakelser);
 			if(spillDeltakelse.getHarspilt()) {
 				testSpill.resetSpilt(spillDeltakelse);
 			}
