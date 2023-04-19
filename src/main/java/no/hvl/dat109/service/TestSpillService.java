@@ -266,7 +266,7 @@ public class TestSpillService {
 	public List<Spill> hentAlleNyeSpill(){
 		List<Spill> spillene = new ArrayList<Spill>();
 		for(Spill spill: spillrepo.findAll()) {
-			if(spill.getStatus().equals("A")) {
+			if(spill.getStatus().equals("A") && spill.getRunde()==0) {
 				spillene.add(spill);
 			}
 		}
