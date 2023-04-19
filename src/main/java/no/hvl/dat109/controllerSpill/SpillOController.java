@@ -68,7 +68,7 @@ public class SpillOController {
 	}	
 		
 	Spill spill = (Spill) session.getAttribute("spill");
-	int rundenr = (int) session.getAttribute("runde");
+	int rundenr = spill.getRunde();
 	System.out.println(rundenr);
 	@SuppressWarnings("unchecked")
 	List<Spilldeltakelse> spillDeltakelser = (List<Spilldeltakelse>) session.getAttribute("spillere");	
