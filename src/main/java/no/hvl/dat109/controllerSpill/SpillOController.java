@@ -52,18 +52,7 @@ public class SpillOController {
 		session.setAttribute("spillere", sd);
 		session.setAttribute("size", sd.size());
 		Spilldeltakelse spillDeltakelse = (Spilldeltakelse) session.getAttribute("spilldeltakelse");
-		
-		int rundenr= spill.getRunde();
-		
-		session.setAttribute("runde", rundenr);
-		
-		if(testSpill.harAlleSpiltSinTur(sd)) {
-			rundenr = testSpill.okNyrunde(spill, sd);
-			testSpill.resetHarspilt(sd);
-			if(spillDeltakelse.getHarspilt()) {
-				testSpill.resetSpilt(spillDeltakelse);
-			}
-		} 
+	
 
 	
 	return "spillView";
