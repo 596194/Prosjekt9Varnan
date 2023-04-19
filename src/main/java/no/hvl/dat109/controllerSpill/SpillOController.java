@@ -57,9 +57,6 @@ public class SpillOController {
 		
 		session.setAttribute("runde", rundenr);
 		
-		if(rundenr==0) {
-			rundenr = testSpill.okNyrunde(spill);
-		}
 		if(testSpill.harAlleSpiltSinTur(sd)) {
 			rundenr = testSpill.okNyrunde(spill, sd);
 			testSpill.resetHarspilt(sd);
@@ -82,17 +79,28 @@ public class SpillOController {
 	}	
 		
 	Spill spill = (Spill) session.getAttribute("spill");
-	int rundenr = (int) session.getAttribute("runde");
+	int rundenr = spill.getRunde();
 	System.out.println(rundenr);
 	@SuppressWarnings("unchecked")
 	List<Spilldeltakelse> spillDeltakelser = (List<Spilldeltakelse>) session.getAttribute("spillere");	
 	Spilldeltakelse spillDeltakelse = (Spilldeltakelse) session.getAttribute("spilldeltakelse");
-
+	//System.out.println(testSpill.harAlleSpiltSinTur(spillDeltakelser));
+	//System.out.println(spillDeltakelse);
 	if(rundenr==15) {
 		testSpill.ferdigSpill(spill);
 		ra.addFlashAttribute("redirectMessage", FERDIG);
 		return "redirect:" + SPILL_URL;
 	} else {
+		if(rundenr==0) {
+			rundenr = testSpill.okNyrunde(spill);
+		}
+		if(testSpill.harAlleSpiltSinTur(spillDeltakelser)) {
+			rundenr = testSpill.okNyrunde(spill, spillDeltakelser);
+			testSpill.resetHarspilt(spillDeltakelser);
+			if(spillDeltakelse.getHarspilt()) {
+				testSpill.resetSpilt(spillDeltakelse);
+			}
+		} 
 		
 		if(!spillDeltakelse.getHarspilt()) {
 			testSpill.spillRunde(rundenr, spillDeltakelse);
