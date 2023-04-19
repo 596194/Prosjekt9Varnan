@@ -51,6 +51,19 @@ public class SpillOController {
 		sd = testSpill.hentSpillDeltakelserForSpill(spill);
 		session.setAttribute("spillere", sd);
 		session.setAttribute("size", sd.size());
+		Spilldeltakelse spillDeltakelse = (Spilldeltakelse) session.getAttribute("spilldeltakelse");
+		
+		int rundenr= spill.getRunde();
+		
+		session.setAttribute("runde", rundenr);
+		
+		if(testSpill.harAlleSpiltSinTur(sd)) {
+			rundenr = testSpill.okNyrunde(spill, sd);
+			testSpill.resetHarspilt(sd);
+			if(spillDeltakelse.getHarspilt()) {
+				testSpill.resetSpilt(spillDeltakelse);
+			}
+		} 
 
 	
 	return "spillView";
@@ -66,7 +79,7 @@ public class SpillOController {
 	}	
 		
 	Spill spill = (Spill) session.getAttribute("spill");
-	int rundenr = spill.getRunde();
+	int rundenr = (int) session.getAttribute("runde");
 	System.out.println(rundenr);
 	@SuppressWarnings("unchecked")
 	List<Spilldeltakelse> spillDeltakelser = (List<Spilldeltakelse>) session.getAttribute("spillere");	
